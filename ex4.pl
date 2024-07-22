@@ -34,22 +34,14 @@ reverse([], []).
 reverse([[Node1, Node2] | Rest], [[Node2, Node1] | Reversed]) :- reverse(Rest, Reversed).
 
 
-
 % Signature: degree(Node, Graph, Degree)/3
 % Purpose: Degree is the degree of node Node, denoted by a Church number (as defined in class)
 
 degree(Node, Graph, Degree) :- degree_helper(Node, Graph, zero, Degree).
 
-degree_helper(Node, [], Acc, Acc).
-degree_helper(Node, [[Node,_]|Edges], Acc, Degree) :- degree_helper(Node, Edges, s(Acc), Degree).
-degree_helper(Node, [[_,Node]|Edges], Acc, Degree) :- degree_helper(Node, Edges, Acc, Degree).
-degree_helper(Node, [_|Edges], Acc, Degree) :- degree_helper(Node, Edges, Acc, Degree).
-
-
-
-
-
-
+degree_helper(Node, [[Node,_]|Rest], Acc, Degree) :- degree_helper(Node, Rest, s(Acc), Degree).
+degree_helper(Node, [[_,_]|Rest], Acc, Degree) :- degree_helper(Node, Rest, Acc, Degree).
+degree_helper(_, [], Acc, Acc).
 
 
 
